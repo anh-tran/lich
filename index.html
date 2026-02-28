@@ -66,6 +66,10 @@
     <p id="thi"></p>
     <p id="canh"></p>
 
+    <p id="thang"></p>
+    <p id="ngay"></p>
+    <p id="gio"></p>
+
     <script src="./amlich-aa98.js"></script>
     <script>
         const message = 'Hello world'; // Try edit me
@@ -170,9 +174,27 @@
         document.querySelector('#canh').innerHTML = dt.toLocaleTimeString();
         document.querySelector('#canh').classList.add(canh);
 
-        // Log to console
-        console.log(message);
+        dt.setHours(dt.getHours() + 1);
+        const LUC_NHAM = ["Đại An", "Lưu Niên", "Tốc Hỉ", "Xích Khẩu", "Tiểu Cát", "Không Vong"];
+        const CHI = ["Tý", "Sửu", "Dần", "Mão", "Thìn", "Tỵ", "Ngọ", "Mùi", "Thân", "Dậu", "Tuất", "Hợi"];
+        let lunar2 = convertSolar2Lunar2(dt.getDate(), dt.getMonth() + 1, dt.getFullYear(), 7);
 
+        let d = (lunar2[1] - 1) % 6; // thang
+        var e;
+        e = document.querySelector('#thang');
+        e.innerHTML = `Tháng ${lunar[1]}${lunar[3] ? "N" : ""} ${LUC_NHAM[d]}`;
+        e.classList.add(d%2?"_":"H");
+        
+
+        d = (d + lunar2[0] - 1) % 6; // ngay
+        e = document.querySelector('#ngay');
+        e.innerHTML = `Ngày ${lunar2[0]} ${LUC_NHAM[d]}`;
+        e.classList.add(d%2?"_":"H");
+
+        d = (d + dt.getHours()/2) % 6; // gio
+        e = document.querySelector('#gio');
+        e.innerHTML = `Giờ ${CHI[dt.getHours()/2]} ${LUC_NHAM[d]}`;
+        e.classList.add(d%2?"_":"H");
     </script>
 </body>
 
