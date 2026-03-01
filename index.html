@@ -191,10 +191,11 @@
         e.innerHTML = `Ngày ${lunar2[0]} ${LUC_NHAM[d]}`;
         e.classList.add(d%2?"_":"H");
 
-        d = (d + dt.getHours()/2) % 6; // gio
+        d = (d + dt.getHours()>>1) % 6; // gio
         e = document.querySelector('#gio');
-        e.innerHTML = `Giờ ${CHI[dt.getHours()/2]} ${LUC_NHAM[d]}`;
+        e.innerHTML = `Giờ ${CHI[dt.getHours()>>1]} ${LUC_NHAM[d]}`;
         e.classList.add(d%2?"_":"H");
+        console.log(dt.getHours()>>1);
     </script>
 </body>
 
