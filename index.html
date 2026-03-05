@@ -10,7 +10,7 @@
             /* Make it white if you need */
             color: white;
             padding: 0 24px;
-            max-width: 30%;
+            max-width: 50%;
             margin: 0 auto;
             height: 100vh;
             display: block;
@@ -57,6 +57,33 @@
             background-color: #FFFFFF;
             color: black;
         }
+
+        div span {
+            margin: 1px auto;
+        }
+
+        div span:nth-child(1) {
+            display: table-cell;
+            width: 50%;
+            float: left;
+        }
+
+        div span:nth-child(2) {
+            display: table-cell;
+            width: 50%;
+            float: right;
+        }
+
+        #lucnham {
+            display: table;
+            width: 100%;
+        }
+
+        #thang,
+        #ngay,
+        #gio {
+            display: table-row;
+        }
     </style>
 </head>
 
@@ -66,14 +93,14 @@
     <p id="thi"></p>
     <p id="canh"></p>
 
-    <p id="thang"></p>
-    <p id="ngay"></p>
-    <p id="gio"></p>
+    <div id="lucnham">
+        <div id="thang"></div>
+        <div id="ngay"></div>
+        <div id="gio"></div>
+    </div>
 
     <script src="./amlich-aa98.js"></script>
     <script>
-        const message = 'Hello world'; // Try edit me
-
         let dt = new Date();
 
         let mon = dt.getMonth() + 1;
@@ -181,21 +208,38 @@
 
         let d = (lunar2[1] - 1) % 6; // thang
         var e;
+        var sp1, sp2;
         e = document.querySelector('#thang');
-        e.innerHTML = `Tháng ${lunar[1]}${lunar[3] ? "N" : ""} ${LUC_NHAM[d]}`;
-        e.classList.add(d%2?"_":"H");
-        
+        sp1 = document.createElement('span');
+        sp2 = document.createElement('span');
+        sp1.innerHTML = `Tháng ${lunar[1]}${lunar[3] ? "N" : ""}`;
+        sp2.innerHTML = `${LUC_NHAM[d]}`;
+        sp1.classList.add(d % 2 ? "_" : "H");
+        sp2.classList.add(d % 2 ? "_" : "H");
+        e.appendChild(sp1);
+        e.appendChild(sp2);
 
         d = (d + lunar2[0] - 1) % 6; // ngay
         e = document.querySelector('#ngay');
-        e.innerHTML = `Ngày ${lunar2[0]} ${LUC_NHAM[d]}`;
-        e.classList.add(d%2?"_":"H");
+        sp1 = document.createElement('span');
+        sp2 = document.createElement('span');
+        sp1.innerHTML = `Ngày ${lunar2[0]}`;
+        sp2.innerHTML = `${LUC_NHAM[d]}`;
+        sp1.classList.add(d % 2 ? "_" : "H");
+        sp2.classList.add(d % 2 ? "_" : "H");
+        e.appendChild(sp1);
+        e.appendChild(sp2);
 
-        d = (d + dt.getHours()>>1) % 6; // gio
+        d = (d + (dt.getHours() >> 1)) % 6; // gio
         e = document.querySelector('#gio');
-        e.innerHTML = `Giờ ${CHI[dt.getHours()>>1]} ${LUC_NHAM[d]}`;
-        e.classList.add(d%2?"_":"H");
-        console.log(dt.getHours()>>1);
+        sp1 = document.createElement('span');
+        sp2 = document.createElement('span');
+        sp1.innerHTML = `Giờ ${CHI[dt.getHours() >> 1]}`;
+        sp2.innerHTML = `${LUC_NHAM[d]}`;
+        sp1.classList.add(d % 2 ? "_" : "H");
+        sp2.classList.add(d % 2 ? "_" : "H");
+        e.appendChild(sp1);
+        e.appendChild(sp2);
     </script>
 </body>
 
