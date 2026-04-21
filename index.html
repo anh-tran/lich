@@ -106,7 +106,7 @@
         let dt = new Date();
 
         let mon = dt.getMonth() + 1;
-        if ((dt.getDay() > 15) && (mon % 3 == 1)) mon += 1;
+        if ((dt.getDate() > 15) && (mon % 3 == 1)) mon += 1;
         switch (mon) {
             case 12:
             case 1:
